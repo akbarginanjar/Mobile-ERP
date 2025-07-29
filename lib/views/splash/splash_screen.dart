@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
     return GetBuilder<SplashController>(
       init: SplashController(),
       builder: (s) => const Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.orange,
         body: Center(
           widthFactor: 300,
           heightFactor: 400,
@@ -18,10 +18,11 @@ class SplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(image: AssetImage("assets/images/logo.png")),
+              SizedBox(height: 10),
               Text(
                 'BIMA ERP',
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 30,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),

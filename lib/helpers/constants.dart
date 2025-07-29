@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:mobile_erp/helpers/size_config.dart';
 
 const kPrimaryColor = Colors.orange;
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 
 final headingStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
+  fontSize: 28,
   fontWeight: FontWeight.bold,
   color: Colors.black,
   height: 1.5,
 );
 
 final headingStyleLight = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
+  fontSize: 28,
   fontWeight: FontWeight.bold,
   color: Colors.white,
   height: 1.5,
@@ -37,9 +36,7 @@ const String kAddressNullError = "Please Enter your address";
 const String PinError = "Pin Salah !!";
 
 final otpInputDecoration = InputDecoration(
-  contentPadding: EdgeInsets.symmetric(
-    vertical: getProportionateScreenWidth(15),
-  ),
+  contentPadding: EdgeInsets.symmetric(vertical: 15),
   border: outlineInputBorder(),
   focusedBorder: outlineInputBorder(),
   enabledBorder: outlineInputBorder(),
@@ -47,7 +44,7 @@ final otpInputDecoration = InputDecoration(
 
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
-    borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
+    borderRadius: BorderRadius.circular(15),
     borderSide: const BorderSide(color: Colors.white),
   );
 }

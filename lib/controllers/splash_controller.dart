@@ -11,14 +11,13 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
     Timer(const Duration(seconds: 3), () async {
-      // String? token = box.read(Base.token);
-      // String? user = box.read(Base.user);
-      // if (user == null && token == null) {
-      //   Get.offNamed(RouteName.login);
-      // } else {
-      //   Get.offNamed(RouteName.pin);
-      // }
-      Get.offNamed(RouteName.login);
+      String? token = box.read(Base.token);
+      String? user = box.read(Base.user);
+      if (user == null && token == null) {
+        Get.offNamed(RouteName.login);
+      } else {
+        Get.offNamed(RouteName.home);
+      }
     });
   }
 
@@ -52,7 +51,7 @@ class SplashController extends GetxController {
           child: SizedBox(
             width: 60,
             height: 60,
-            child: CircularProgressIndicator(strokeWidth: 10),
+            child: CircularProgressIndicator(strokeWidth: 4),
           ),
         ),
       ),

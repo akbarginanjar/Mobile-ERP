@@ -2,7 +2,7 @@ abstract class Base {
   static const String secretKey =
       'aKndsan23928h98hKJbkjwlKHD9dsbjwiobqUJGHBDWHvkHSJQUBSQOPSAJHVwoihdapq';
   //Start link URL & Version
-  static const String dev = "https://dev-api.bimeastindonesia.com/";
+  static const String dev = "https://api-bim.expreship.id/";
   static const String prod = "https://api.bimeastindonesia.com/";
   static const String url = dev;
   static const String version = "v1";
@@ -309,7 +309,7 @@ abstract class Base {
   //Start data user
   static String token = "tokens";
   static String user = "users";
-  static String acess = "access";
+  static String access = "access";
   static String gudang = "gudang";
 
   static String namePrint = "name_print";
