@@ -57,7 +57,7 @@ class DefaultButtonSecond extends StatelessWidget {
             borderRadius: BorderRadius.circular(17),
           ),
           // ignore: deprecated_member_use
-          foregroundColor: Colors.white,
+          foregroundColor: Colors.grey,
           backgroundColor: Colors.white,
         ),
         onPressed: press as Function()?,

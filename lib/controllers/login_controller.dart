@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mobile_erp/controllers/splash_controller.dart';
@@ -42,6 +43,7 @@ class LoginController extends GetxController {
                   box.write(Base.user, jsonEncode(value.body['data'])),
                   box.write(Base.access, jsonEncode(value.body['access'])),
                   Get.offAllNamed(RouteName.home),
+                  EasyLoading.showSuccess('Login Berhasil'),
                 }
               else
                 {
