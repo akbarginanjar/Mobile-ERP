@@ -49,6 +49,19 @@ OutlineInputBorder outlineInputBorder() {
   );
 }
 
+String formatRupiah(int value) {
+  return 'Rp ${NumberFormat.decimalPattern('id').format(value)}';
+}
+
+String formatTanggal(String tanggalString) {
+  try {
+    final DateTime parsedDate = DateTime.parse(tanggalString);
+    return DateFormat('dd-MM-yyyy').format(parsedDate);
+  } catch (e) {
+    return '-'; // fallback jika parsing gagal
+  }
+}
+
 String convertToIdr(number) {
   final formatter = NumberFormat.currency(
     locale: 'id_ID',

@@ -346,6 +346,8 @@ abstract class RouteName {
   static const ajuanKonsumen = "/ajuankonsumen";
   //analisis page
   static const analisis = "/analisis";
+  static const tambahAnalisis = "/analisis/add";
+  static const detailAnalisis = "/analisis/detail";
   //penjualan page
   static const penjualan = "/penjualan";
   //collection page

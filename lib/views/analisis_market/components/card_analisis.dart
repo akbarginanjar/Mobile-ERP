@@ -31,7 +31,7 @@ class AnalisisCard extends StatelessWidget {
                 Icon(Icons.date_range, color: kPrimaryColor),
                 SizedBox(width: 5),
                 Text(
-                  "Tanggal : ${data['tanggal'] ?? '-'}",
+                  "Tanggal : ${formatTanggal(data['tanggal'])}",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

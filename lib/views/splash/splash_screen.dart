@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
     return GetBuilder<SplashController>(
       init: SplashController(),
       builder: (s) => const Scaffold(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.black,
         body: Center(
           widthFactor: 300,
           heightFactor: 400,

@@ -35,15 +35,15 @@ class MainScreen extends StatelessWidget {
             selectedItemColor: kPrimaryColor,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(PhosphorIcons.house()),
+                icon: Icon(PhosphorIcons.house(), size: 30),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(PhosphorIcons.listChecks()),
+                icon: Icon(PhosphorIcons.listChecks(), size: 30),
                 label: 'Pesanan',
               ),
               BottomNavigationBarItem(
-                icon: Icon(PhosphorIcons.user()),
+                icon: Icon(PhosphorIcons.user(), size: 30),
                 label: 'Profil',
               ),
             ],

@@ -26,11 +26,17 @@ InputDecorationTheme inputDecorationTheme() {
     borderSide: BorderSide(color: Colors.grey[500]!, width: 1.4),
     gapPadding: 10,
   );
+  OutlineInputBorder outlineInputErrorBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(17),
+    borderSide: BorderSide(color: Colors.red[800]!),
+    gapPadding: 10,
+  );
   return InputDecorationTheme(
     floatingLabelBehavior: FloatingLabelBehavior.always,
     contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputFocusBorder,
+    errorBorder: outlineInputErrorBorder,
     border: outlineInputBorder,
     hintStyle: TextStyle(color: Colors.grey),
   );

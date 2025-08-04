@@ -11,11 +11,20 @@ class AnalisisServices extends GetConnect implements GetxService {
     return get(Base.url + Base.analisisGet, headers: header, query: params);
   }
 
+  Future<Response> typeKonsumen(tokens) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return get('${Base.url}/v1/konsumen-type', headers: header);
+  }
+
   Future<Response> analisisPost(tokens, body) {
     final header = {
       'device': 'mobile',
       'Secret': Base.secretKey,
-      'Authorization': 'bearer $tokens',
+      'Author': 'bearer $tokens',
     };
     return post(Base.url + Base.analisisPost, headers: header, body);
   }
