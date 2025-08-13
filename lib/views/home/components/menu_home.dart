@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
@@ -56,7 +55,9 @@ class MenuHome extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(RouteName.requestBarang);
+                      },
                       borderRadius: BorderRadius.circular(20),
                       child: Padding(
                         padding: const EdgeInsets.all(25),

@@ -7,7 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mobile_erp/controllers/splash_controller.dart';
 import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
-import 'package:mobile_erp/services/auth_services.dart';
+import 'package:mobile_erp/services/auth_service.dart';
 
 class LoginController extends GetxController {
   final box = GetStorage();
@@ -42,6 +42,7 @@ class LoginController extends GetxController {
                   box.write(Base.token, value.body['tokens']),
                   box.write(Base.user, jsonEncode(value.body['data'])),
                   box.write(Base.access, jsonEncode(value.body['access'])),
+                  box.write(Base.gudang, jsonEncode(value.body['myGudang'])),
                   Get.offAllNamed(RouteName.home),
                   EasyLoading.showSuccess('Login Berhasil'),
                 }

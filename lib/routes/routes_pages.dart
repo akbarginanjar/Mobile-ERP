@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:mobile_erp/helpers/base.dart';
+import 'package:mobile_erp/views/ajuan_barang/ajuan_barang_screen.dart';
+import 'package:mobile_erp/views/ajuan_barang/rincian_ajuan_barang_screen.dart';
 import 'package:mobile_erp/views/analisis_market/add_analisis_screen.dart';
 import 'package:mobile_erp/views/analisis_market/analisis_market_screen.dart';
 import 'package:mobile_erp/views/analisis_market/detail_analisis.dart';
@@ -20,6 +22,10 @@ class Routes {
     GetPage(
       name: RouteName.detailAnalisis,
       page: () => const DetailAnalisisScreen(),
+    ),
+    GetPage(
+      name: RouteName.requestBarang,
+      page: () => const AjuanBarangScreen(),
     ),
   ];
 }

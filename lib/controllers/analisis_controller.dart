@@ -11,7 +11,7 @@ import 'package:mobile_erp/controllers/splash_controller.dart';
 import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/type_konsumen.dart';
-import 'package:mobile_erp/services/analisis_services.dart';
+import 'package:mobile_erp/services/analisis_service.dart';
 
 class AnalisisController extends GetxController {
   late ScrollController scrollController;
@@ -70,6 +70,8 @@ class AnalisisController extends GetxController {
             selectedTypeKonsumen.value = tipeList.first;
           });
         }
+      } else if (response.statusCode == 401) {
+        SessionExpiredDialog.show();
       }
     } catch (e) {
       Get.snackbar('Error', e.toString());
@@ -177,44 +179,7 @@ class AnalisisController extends GetxController {
       if (response.statusCode == null || response.body == null) {
         throw Exception('Gagal memuat data');
       } else if (response.statusCode == 401) {
-        return Get.defaultDialog(
-          barrierDismissible: false,
-          titlePadding: const EdgeInsets.only(top: 20),
-          title: "Login Kembali",
-          titleStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
-          content: const Padding(
-            padding: EdgeInsets.all(5),
-            child: Text(
-              'Sesi login telah habis silahkan login kembali.',
-              style: TextStyle(fontSize: 12),
-            ),
-          ),
-          contentPadding: const EdgeInsets.only(
-            bottom: 20,
-            top: 10,
-            left: 20,
-            right: 20,
-          ),
-          actions: [
-            DefaultButton(
-              text: "Login",
-              color: kPrimaryColor,
-              press: () {
-                SplashController().loading();
-                Timer(const Duration(seconds: 1), () async {
-                  GetStorage().remove(Base.token);
-                  GetStorage().remove(Base.user);
-                  GetStorage().remove(Base.access);
-                  Get.back();
-                  Get.offAllNamed(RouteName.login);
-                });
-              },
-            ),
-          ],
-        );
+        return SessionExpiredDialog.show();
       }
 
       final List<dynamic> rawData = response.body['data'];
@@ -245,27 +210,7 @@ class AnalisisController extends GetxController {
         EasyLoading.showSuccess('Data berhasil disimpan');
       } else if (response.statusCode == 401) {
         EasyLoading.dismiss();
-        Get.defaultDialog(
-          title: "Login Kembali",
-          barrierDismissible: false,
-          content: const Text('Sesi login telah habis, silakan login kembali.'),
-          actions: [
-            DefaultButton(
-              text: "Login",
-              color: kPrimaryColor,
-              press: () {
-                SplashController().loading();
-                Timer(const Duration(seconds: 1), () {
-                  GetStorage().remove(Base.token);
-                  GetStorage().remove(Base.user);
-                  GetStorage().remove(Base.access);
-                  Get.back();
-                  Get.offAllNamed(RouteName.login);
-                });
-              },
-            ),
-          ],
-        );
+        SessionExpiredDialog.show();
       } else {
         EasyLoading.dismiss();
         Get.snackbar('Gagal', 'Gagal mengirim data: ${response.bodyString}');

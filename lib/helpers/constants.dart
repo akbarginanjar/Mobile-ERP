@@ -1,6 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_erp/components/button.dart';
+import 'package:mobile_erp/controllers/splash_controller.dart';
+import 'package:mobile_erp/helpers/base.dart';
 
 const kPrimaryColor = Colors.orange;
 const kSecondaryColor = Color(0xFF979797);
@@ -109,6 +116,78 @@ class CurrencyFormat extends TextInputFormatter {
     );
   }
 }
+
+class Badge extends StatelessWidget {
+  final String text;
+  final Color backgroundColor;
+  final Color textColor;
+  final double borderRadius;
+  final EdgeInsetsGeometry padding;
+  final double fontSize;
+
+  const Badge({
+    Key? key,
+    required this.text,
+    this.backgroundColor = Colors.blue,
+    this.textColor = Colors.white,
+    this.borderRadius = 12.0,
+    this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    this.fontSize = 12.0,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicWidth(
+      // biar width sesuai isi
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: fontSize,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SessionExpiredDialog {
+  static void show() {
+    Get.defaultDialog(
+      title: "Login Kembali",
+      barrierDismissible: false,
+      content: const Text(
+        'Sesi login telah habis, silakan login kembali.',
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        DefaultButton(
+          text: "Login",
+          color: kPrimaryColor,
+          press: () {
+            SplashController().loading();
+            Timer(const Duration(seconds: 1), () {
+              final box = GetStorage();
+              box.remove(Base.token);
+              box.remove(Base.user);
+              box.remove(Base.access);
+              Get.back();
+              Get.offAllNamed(RouteName.login);
+            });
+          },
+        ),
+      ],
+    );
+  }
+}
+
 
 // const kDefaultPaddin = 20.0;
 // const kTextLightColor = Color(0xFFACACAC);

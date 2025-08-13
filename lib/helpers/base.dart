@@ -338,6 +338,7 @@ abstract class RouteName {
   static const satuanBarang = "/satuan";
   static const kategoriBarang = "/kategori";
   static const requestBarang = "/ajuanbarang";
+  static const detailAjuanBarang = "/ajuanbarang/detail";
   static const penerimaanBarang = "/penerimaan-barang";
   //Stock Barang Mobil page
   static const stockBarangMobil = "/kendaraan-barang";
