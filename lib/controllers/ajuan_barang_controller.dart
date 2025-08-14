@@ -18,7 +18,7 @@ class AjuanBarangController extends GetxController {
   late final int karyawanId;
 
   int start = 0;
-  int length = 5;
+  int length = 6;
   String order = "desc";
 
   @override
@@ -86,6 +86,36 @@ class AjuanBarangController extends GetxController {
   void loadMore() {
     if (!isMoreLoading.value && hasMore.value) {
       loadData();
+    }
+  }
+
+  //DETAIL AJUAN BARANG
+  var isLoadingDetail = false.obs;
+  var detail = {}.obs;
+
+  Future<void> loadDetail(String requestId) async {
+    try {
+      isLoadingDetail.value = true;
+      final params = {
+        'request_id': requestId,
+        'sales_id': karyawanId.toString(),
+      };
+
+      final res = await AjuanBarangService().ajuanBarangDetail(token, params);
+
+      final body = res.body;
+
+      if (res.statusCode == 200 && body != null) {
+        if (body['data'] is List && body['data'].isNotEmpty) {
+          detail.value = body['data'][0]; // Map
+        } else {
+          detail.value = {};
+        }
+      }
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    } finally {
+      isLoadingDetail.value = false;
     }
   }
 }

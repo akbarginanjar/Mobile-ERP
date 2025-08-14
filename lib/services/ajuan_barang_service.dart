@@ -14,4 +14,17 @@ class AjuanBarangService extends GetConnect implements GetxService {
       query: params,
     );
   }
+
+  Future<Response> ajuanBarangDetail(tokens, params) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return get(
+      Base.url + Base.requestBarangDetail,
+      headers: header,
+      query: params,
+    );
+  }
 }
