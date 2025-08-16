@@ -58,6 +58,7 @@ class ProfilScreen extends StatelessWidget {
                           GetStorage().remove(Base.token);
                           GetStorage().remove(Base.user);
                           GetStorage().remove(Base.access);
+                          GetStorage().remove(Base.gudang);
                           Get.back();
                           Get.offAllNamed(RouteName.login);
                         });

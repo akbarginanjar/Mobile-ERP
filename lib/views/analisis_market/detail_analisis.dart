@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_erp/components/button.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 
 class DetailAnalisisScreen extends StatelessWidget {
@@ -102,6 +103,66 @@ class DetailAnalisisScreen extends StatelessWidget {
                   );
                 }).toList(),
               ],
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13),
+                  side: BorderSide(color: Colors.red[800]!),
+                ),
+              ),
+              onPressed: () {
+                Get.defaultDialog(
+                  titlePadding: EdgeInsets.only(top: 20),
+                  title: "Hapus Analisis Market?",
+                  titleStyle: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  content: const Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      'Apakah anda ingin menghapus Analisis Market ini?',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.only(
+                    bottom: 20,
+                    top: 10,
+                    left: 20,
+                    right: 20,
+                  ),
+                  actions: [
+                    DefaultButtonSecond(
+                      text: "Batal",
+                      press: () {
+                        Get.back();
+                      },
+                    ),
+                    DefaultButton(
+                      text: "Hapus",
+                      press: () async {
+                        Get.back();
+                        final payload = [
+                          // {"id": ajuanBarang.id, "fungsi": 2},
+                        ];
+                        //status 1 = add, 2 = delete
+                        // controller.addAjuanBarang(payload, 2);
+                      },
+                      color: Colors.red,
+                    ),
+                  ],
+                );
+              },
+              child: Text(
+                'Hapus Analisis Market',
+                style: TextStyle(
+                  color: Colors.red[800],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

@@ -2,7 +2,7 @@ abstract class Base {
   static const String secretKey =
       'aKndsan23928h98hKJbkjwlKHD9dsbjwiobqUJGHBDWHvkHSJQUBSQOPSAJHVwoihdapq';
   //Start link URL & Version
-  static const String dev = "https://api-bim.expreship.id/";
+  static const String dev = "https://api-dev.expreship.id/";
   static const String prod = "https://api.bimeastindonesia.com/";
   static const String url = dev;
   static const String version = "v1";
@@ -142,7 +142,7 @@ abstract class Base {
   static const String penerimaanBarangPost = "$version/input/penerimaan";
   // request
   static const String requestBarangGet = "$version/request-barang";
-  static const String requestBarangDetail = "$version/request-barang-rute";
+  static const String requestBarangDetail = "$version/request-barang/";
   static const String requestBarangPost = "$version/input/request-barang";
   static const String requestBarang2Post = "$version/input/request-barang-many";
 
@@ -340,6 +340,7 @@ abstract class RouteName {
   static const kategoriBarang = "/kategori";
   static const requestBarang = "/ajuanbarang";
   static const detailAjuanBarang = "/ajuanbarang/detail";
+  static const tambahAjuanBarang = "/ajuanbarang/tambah";
   static const penerimaanBarang = "/penerimaan-barang";
   //Stock Barang Mobil page
   static const stockBarangMobil = "/kendaraan-barang";

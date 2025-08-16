@@ -218,7 +218,7 @@ class AddAnalisisScreen extends StatelessWidget {
                       if (controller.formKeyAdd.currentState!.validate()) {
                         final payload = [
                           {
-                            "tanggal": controller.tanggal.text,
+                            "tanggal": controller.selectTanggal.toString(),
                             "karyawan_id": controller.karyawanId,
                             "tipe_konsumen":
                                 controller.selectedTypeKonsumen.value!.id,

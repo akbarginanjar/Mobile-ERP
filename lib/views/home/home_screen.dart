@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/views/home/components/menu_home.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -42,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Halo, Sales User',
+                              'Halo, ${jsonDecode(GetStorage().read(Base.user))['karyawan']['nama_lengkap']}',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,

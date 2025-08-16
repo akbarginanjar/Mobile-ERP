@@ -32,7 +32,7 @@ class LoginController extends GetxController {
 
   void nextLogin() {
     try {
-      SplashController().loading();
+      // SplashController().loading();
       AuthServices()
           .login(FormData({'email': mail.text, 'password': pass.text}))
           .then(

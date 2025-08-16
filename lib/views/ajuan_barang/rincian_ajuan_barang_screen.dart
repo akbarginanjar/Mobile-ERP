@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart' hide Badge;
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_erp/components/button.dart';
 import 'package:mobile_erp/controllers/ajuan_barang_controller.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/ajuan_barang_model.dart';
@@ -85,10 +86,6 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                 );
               }
 
-              final request = controller.detail['request'];
-              final sales = controller.detail['sales'];
-              final rute = controller.detail['rute'];
-
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -105,11 +102,20 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 5),
-                        Badge(
-                          text: '${rute?['nama_rute']}',
-                          backgroundColor: Colors.green[800]!,
-                          borderRadius: 7,
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: controller.detail['rute']
+                              .map<Widget>(
+                                (r) => Badge(
+                                  text: '${r['rute']['nama_rute']}',
+                                  backgroundColor: Colors.green[800]!,
+                                  borderRadius: 7,
+                                ),
+                              )
+                              .toList(),
                         ),
+
                         SizedBox(height: 5),
                       ],
                     ),
@@ -123,18 +129,35 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Rincian Ajuan Barang',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Rincian Ajuan Barang',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            if (ajuanBarang.statusData!.dataStatus == 1)
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: kPrimaryColor,
+                                  foregroundColor: Colors.deepOrange,
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Tambah',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                          ],
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 10),
                         Card(
                           elevation: 0,
                           margin: EdgeInsets.all(0),
-                          color: Colors.grey[200],
+                          color: Colors.grey[300],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
@@ -146,7 +169,8 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                               bottom: 0,
                             ),
                             child: ListView.builder(
-                              itemCount: request['rincian_barang'].length,
+                              itemCount:
+                                  controller.detail['rincian_barang'].length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Card(
@@ -172,7 +196,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                           style: TextStyle(fontSize: 9),
                                         ),
                                         Text(
-                                          '${request['rincian_barang'][index]['barang'] ?? '-'}',
+                                          '${controller.detail['rincian_barang'][index]['barang']['nama'] ?? '-'}',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -191,7 +215,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                                   style: TextStyle(fontSize: 9),
                                                 ),
                                                 Text(
-                                                  '${request['rincian_barang'][index]['qty_request']}',
+                                                  '${controller.detail['rincian_barang'][index]['qty_request']}',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -207,8 +231,16 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                                   style: TextStyle(fontSize: 9),
                                                 ),
                                                 Text(
-                                                  '${request['rincian_barang'][index]['tujuan'][0]['qty_real']}',
-                                                  style: TextStyle(
+                                                  (controller.detail['rincian_barang'][index]['tujuan']
+                                                              is List &&
+                                                          (controller.detail['rincian_barang'][index]['tujuan']
+                                                                  as List)
+                                                              .isNotEmpty)
+                                                      ? controller
+                                                            .detail['rincian_barang'][index]['tujuan'][0]['qty_real']
+                                                            .toString()
+                                                      : '-',
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -223,7 +255,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                                   style: TextStyle(fontSize: 9),
                                                 ),
                                                 Text(
-                                                  '${request['rincian_barang'][index]['barang'] ?? '-'}',
+                                                  '${controller.detail['rincian_barang'][index]['barang']['satuan']['satuan'] ?? '-'}',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -238,7 +270,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                           style: TextStyle(fontSize: 9),
                                         ),
                                         Text(
-                                          '${request['rincian_barang'][index]['keterangan'] ?? '-'}',
+                                          '${controller.detail['rincian_barang'][index]['keterangan'] ?? '-'}',
                                           style: TextStyle(),
                                         ),
                                         // TextFormField(
@@ -260,6 +292,69 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                 ],
               );
             }),
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(13),
+                    side: BorderSide(color: Colors.red[800]!),
+                  ),
+                ),
+                onPressed: () {
+                  Get.defaultDialog(
+                    titlePadding: EdgeInsets.only(top: 20),
+                    title: "Hapus Ajuan Barang?",
+                    titleStyle: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    content: const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        'Apakah anda ingin menghapus Ajuang Barang ini?',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.only(
+                      bottom: 20,
+                      top: 10,
+                      left: 20,
+                      right: 20,
+                    ),
+                    actions: [
+                      DefaultButtonSecond(
+                        text: "Batal",
+                        press: () {
+                          Get.back();
+                        },
+                      ),
+                      DefaultButton(
+                        text: "Hapus",
+                        press: () async {
+                          Get.back();
+                          final payload = [
+                            {"id": ajuanBarang.id, "fungsi": 2},
+                          ];
+                          //status 1 = add, 2 = delete
+                          controller.addAjuanBarang(payload, 2);
+                        },
+                        color: Colors.red,
+                      ),
+                    ],
+                  );
+                },
+                child: Text(
+                  'Hapus Ajuan Barang',
+                  style: TextStyle(
+                    color: Colors.red[800],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

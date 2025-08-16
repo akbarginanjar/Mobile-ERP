@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Badge;
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:mobile_erp/controllers/ajuan_barang_controller.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/ajuan_barang_model.dart';
 import 'package:mobile_erp/views/ajuan_barang/rincian_ajuan_barang_screen.dart';
@@ -12,6 +13,7 @@ class CardAjuanBarang extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AjuanBarangController controller = Get.find();
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -23,8 +25,13 @@ class CardAjuanBarang extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: EdgeInsets.only(bottom: 4, left: 15, right: 15),
-        onTap: () {
-          Get.to(RincianAjuanBarangScreen(ajuanBarang: item));
+        onTap: () async {
+          final result = await Get.to(
+            RincianAjuanBarangScreen(ajuanBarang: item),
+          );
+          if (result == true) {
+            controller.onRefresh();
+          }
         },
         leading: CircleAvatar(child: Icon(PhosphorIcons.boxArrowUp())),
         title: Column(
