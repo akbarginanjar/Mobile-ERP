@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:mobile_erp/helpers/base.dart';
+import 'package:mobile_erp/models/penyimpanan_barang_model.dart';
 import 'package:mobile_erp/views/ajuan_barang/add_ajuan_barang_screen.dart';
 import 'package:mobile_erp/views/ajuan_barang/ajuan_barang_screen.dart';
+import 'package:mobile_erp/views/ajuan_barang/penyimpanan_barang_screen.dart';
 import 'package:mobile_erp/views/ajuan_barang/rincian_ajuan_barang_screen.dart';
 import 'package:mobile_erp/views/analisis_market/add_analisis_screen.dart';
 import 'package:mobile_erp/views/analisis_market/analisis_market_screen.dart';

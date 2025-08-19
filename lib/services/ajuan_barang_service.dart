@@ -45,4 +45,22 @@ class AjuanBarangService extends GetConnect implements GetxService {
     };
     return get('${Base.url}/v1/rute', headers: header);
   }
+
+  Future<Response> penyimpananBarangIndex(tokens) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return get(Base.url + Base.gudangPenyimpananGet, headers: header);
+  }
+
+  Future<Response> addRincianAjuanBarang(tokens, body) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return post(Base.url + Base.requestBarangRinciPost, headers: header, body);
+  }
 }

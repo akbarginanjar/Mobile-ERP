@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/ajuan_barang_model.dart';
+import 'package:mobile_erp/models/penyimpanan_barang_model.dart';
 import 'package:mobile_erp/models/rute_model.dart';
 import 'package:mobile_erp/services/ajuan_barang_service.dart';
 
@@ -214,6 +215,128 @@ class AjuanBarangController extends GetxController {
         Get.back(result: true);
         if (status == 1) {
           EasyLoading.showSuccess('Data berhasil disimpan');
+        } else {
+          EasyLoading.showSuccess('Data berhasil dihapus');
+        }
+      } else if (response.statusCode == 401) {
+        EasyLoading.dismiss();
+        SessionExpiredDialog.show();
+      } else {
+        EasyLoading.dismiss();
+        Get.snackbar('Gagal', 'Gagal mengirim data: ${response.bodyString}');
+      }
+    } catch (e) {
+      EasyLoading.dismiss();
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  //PENYIMPANAN BARANG
+  var listBarang = <Map<String, dynamic>>[].obs;
+  var isLoadingPenyimpanan = false.obs;
+  var selectedBarang = <Map<String, dynamic>>[].obs;
+  var selectedBarangApi = <Map<String, dynamic>>[].obs;
+
+  Future<void> loadPenyimpananBarang() async {
+    try {
+      isLoadingPenyimpanan.value = true;
+
+      final response = await AjuanBarangService().penyimpananBarangIndex(token);
+
+      if (response.statusCode == 200) {
+        final data = response.body;
+
+        if (data['data'] is List) {
+          List rawList = data['data'];
+
+          // pakai Map untuk group by barang.id
+          Map<int, Map<String, dynamic>> grouped = {};
+
+          for (var item in rawList) {
+            int barangId = item['barang']['id'];
+            int stok = item['stok'];
+
+            if (grouped.containsKey(barangId)) {
+              // kalau barang sudah ada, tambahkan stoknya
+              grouped[barangId]!['stok'] += stok;
+            } else {
+              // kalau barang belum ada, simpan baru
+              grouped[barangId] = {
+                'id': item['barang']['id'],
+                'nama': item['barang']['nama'],
+                'satuan': item['barang']['satuan']['satuan'],
+                'stok': stok,
+              };
+            }
+          }
+
+          // assign hasil grouping ke listBarang
+          listBarang.assignAll(grouped.values.toList());
+        } else {
+          listBarang.clear();
+        }
+      } else if (response.statusCode == 401) {
+        EasyLoading.dismiss();
+        SessionExpiredDialog.show();
+      } else {
+        Get.snackbar("Error", "Gagal memuat data: ${response.statusCode}");
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoadingPenyimpanan.value = false;
+    }
+  }
+
+  void tambahBarang(
+    Map<String, dynamic> barang,
+    int request,
+    String keterangan,
+    int ajuanBarangId,
+  ) {
+    selectedBarangApi.add({
+      "barang_id": barang['id'],
+      "appr_spv": 0, // kasih 0 untuk menandakan spv belum approve
+      "qty_request": request, // jumlah stok barang yang diminta oleh sales
+      "keterangan": keterangan, // keterangan barang
+      "request_id": ajuanBarangId, // id ajuan barang
+    });
+    selectedBarang.add({
+      "id": barang['id'],
+      "nama": barang['nama'],
+      "stok": barang['stok'],
+      "satuan": barang['satuan'],
+      "request": request,
+      "keterangan": keterangan,
+    });
+  }
+
+  void hapusBarang(Map<String, dynamic> barang) {
+    listBarang.remove(barang);
+  }
+
+  //ADD RINCIAN ANJUAN BARANG
+  Future<void> addRincianAjuanBarang(
+    List<Map<String, dynamic>> payload,
+    status,
+  ) async {
+    try {
+      if (status == 1) {
+        EasyLoading.show(status: 'Mengirim Ajuan Barang...');
+      } else {
+        EasyLoading.show(status: 'Menghapus data...');
+      }
+      final response = await AjuanBarangService().addRincianAjuanBarang(
+        token,
+        jsonEncode(payload),
+      );
+      if (response.statusCode == 200) {
+        EasyLoading.dismiss();
+        Get.back(result: true);
+        if (status == 1) {
+          EasyLoading.showSuccess('Data berhasil dikirim');
+          selectedBarang.clear(); // 🚀 clear state
+          selectedBarangApi.clear(); // 🚀 clear state
         } else {
           EasyLoading.showSuccess('Data berhasil dihapus');
         }
