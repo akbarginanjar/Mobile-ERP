@@ -145,6 +145,8 @@ abstract class Base {
   static const String requestBarangDetail = "$version/request-barang/";
   static const String requestBarangPost = "$version/input/request-barang";
   static const String requestBarang2Post = "$version/input/request-barang-many";
+  static const String requestBarangApproveSales =
+      "$version/input/request-approve-sales";
 
   // request
   static const String requestBarangRinciGet = "$version/request-barang-rincian";

@@ -13,8 +13,6 @@ import 'package:mobile_erp/models/rute_model.dart';
 import 'package:mobile_erp/services/ajuan_barang_service.dart';
 
 class AjuanBarangController extends GetxController {
-  final _service = AjuanBarangService();
-
   var items = <AjuanBarangModel>[].obs;
   var isLoading = false.obs;
   var isMoreLoading = false.obs;
@@ -61,7 +59,7 @@ class AjuanBarangController extends GetxController {
     };
 
     try {
-      final res = await _service.ajuanBarangIndex(token, params);
+      final res = await AjuanBarangService().ajuanBarangIndex(token, params);
       if (res.statusCode == 200) {
         final List<dynamic> dataList = res.body['data'] ?? [];
         final List<AjuanBarangModel> newItems = dataList
@@ -340,6 +338,31 @@ class AjuanBarangController extends GetxController {
         } else {
           EasyLoading.showSuccess('Data berhasil dihapus');
         }
+      } else if (response.statusCode == 401) {
+        EasyLoading.dismiss();
+        SessionExpiredDialog.show();
+      } else {
+        EasyLoading.dismiss();
+        Get.snackbar('Gagal', 'Gagal mengirim data: ${response.bodyString}');
+      }
+    } catch (e) {
+      EasyLoading.dismiss();
+      Get.snackbar('Error', e.toString());
+    }
+  }
+
+  //APPROVE SALES AJUAN BARANG
+  Future<void> approveTerimaAjuanBarang(List payload) async {
+    try {
+      EasyLoading.show(status: 'Menerima Barang...');
+      final response = await AjuanBarangService().approveTerimaAjuanBarang(
+        token,
+        jsonEncode(payload),
+      );
+      if (response.statusCode == 200) {
+        EasyLoading.dismiss();
+        Get.back(result: true);
+        EasyLoading.showSuccess('Barang Berhasil Diterima');
       } else if (response.statusCode == 401) {
         EasyLoading.dismiss();
         SessionExpiredDialog.show();

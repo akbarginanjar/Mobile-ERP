@@ -497,7 +497,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                         content: const Padding(
                           padding: EdgeInsets.all(5),
                           child: Text(
-                            'Pasti barang yang dipilih sudah tepat.',
+                            'Pastikan barang yang dipilih sudah tepat.',
                             style: TextStyle(fontSize: 12),
                           ),
                         ),
@@ -536,6 +536,73 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                       );
                     },
                     color: Colors.lightBlue,
+                  ),
+                )
+              else if (ajuanBarang.statusData!.dataStatus == 3)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 0,
+                  ),
+                  child: Obx(
+                    () => controller.isLoadingDetail.value
+                        ? Center(child: CircularProgressIndicator())
+                        : DefaultButton(
+                            text: 'Barang Diterima',
+                            press: () {
+                              Get.defaultDialog(
+                                titlePadding: EdgeInsets.only(top: 20),
+                                title:
+                                    "Apakah anda ingin\n menerima barang ini?",
+                                titleStyle: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                content: const Padding(
+                                  padding: EdgeInsets.all(5),
+                                  child: Text(
+                                    'Pastikan barang yang dipilih sudah tepat.',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.only(
+                                  bottom: 20,
+                                  top: 10,
+                                  left: 20,
+                                  right: 20,
+                                ),
+                                actions: [
+                                  DefaultButtonSecond(
+                                    text: "Batal",
+                                    press: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                  DefaultButton(
+                                    text: "Barang Diterima",
+                                    press: () async {
+                                      Get.back();
+                                      final payload = [];
+
+                                      controller.detail['rincian_barang']
+                                          .forEach((barang) {
+                                            payload.add({
+                                              "id_request_tujuan":
+                                                  barang['tujuan'][0]['id'],
+                                            });
+                                          });
+
+                                      controller.approveTerimaAjuanBarang(
+                                        payload,
+                                      );
+                                    },
+                                    color: Colors.lightBlue,
+                                  ),
+                                ],
+                              );
+                            },
+                            color: Colors.lightBlue,
+                          ),
                   ),
                 ),
               SizedBox(height: 20),

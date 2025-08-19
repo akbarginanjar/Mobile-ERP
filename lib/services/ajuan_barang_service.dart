@@ -63,4 +63,17 @@ class AjuanBarangService extends GetConnect implements GetxService {
     };
     return post(Base.url + Base.requestBarangRinciPost, headers: header, body);
   }
+
+  Future<Response> approveTerimaAjuanBarang(tokens, body) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return post(
+      Base.url + Base.requestBarangApproveSales,
+      headers: header,
+      body,
+    );
+  }
 }
