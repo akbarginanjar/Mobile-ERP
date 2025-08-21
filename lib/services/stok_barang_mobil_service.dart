@@ -10,4 +10,17 @@ class StokBarangMobilService extends GetConnect implements GetxService {
     };
     return get(Base.url + Base.gudangGet, headers: header, query: params);
   }
+
+  Future<Response> stokMobilDetail(tokens, params) {
+    final header = {
+      'device': 'mobile',
+      'Secret': Base.secretKey,
+      'Author': 'bearer $tokens',
+    };
+    return get(
+      Base.url + Base.gudangStockMobilGet,
+      headers: header,
+      query: params,
+    );
+  }
 }

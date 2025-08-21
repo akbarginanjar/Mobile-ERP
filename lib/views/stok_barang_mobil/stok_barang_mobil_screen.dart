@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile_erp/components/button.dart';
 import 'package:mobile_erp/controllers/stok_barang_mobil_controller.dart';
+import 'package:mobile_erp/helpers/base.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/gudang_model.dart';
+import 'package:mobile_erp/views/stok_barang_mobil/detail_stok_barang_mobil.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class StokBarangMobilScreen extends StatelessWidget {
@@ -172,7 +174,9 @@ class StokBarangMobilScreen extends StatelessWidget {
                         ),
                         child: DefaultButtonSecond(
                           text: 'Lihat Stok',
-                          press: () {},
+                          press: () {
+                            Get.to(DetailStokBarangMobilScreen(gudang: item));
+                          },
                         ),
                       ),
                     ],

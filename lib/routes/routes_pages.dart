@@ -11,6 +11,7 @@ import 'package:mobile_erp/views/analisis_market/detail_analisis.dart';
 import 'package:mobile_erp/views/login/login_screen.dart';
 import 'package:mobile_erp/views/main/main_screen.dart';
 import 'package:mobile_erp/views/splash/splash_screen.dart';
+import 'package:mobile_erp/views/stok_barang_mobil/detail_stok_barang_mobil.dart';
 import 'package:mobile_erp/views/stok_barang_mobil/stok_barang_mobil_screen.dart';
 
 class Routes {
