@@ -11,12 +11,14 @@ import 'package:mobile_erp/views/analisis_market/detail_analisis.dart';
 import 'package:mobile_erp/views/login/login_screen.dart';
 import 'package:mobile_erp/views/main/main_screen.dart';
 import 'package:mobile_erp/views/splash/splash_screen.dart';
+import 'package:mobile_erp/views/stok_barang_mobil/stok_barang_mobil_screen.dart';
 
 class Routes {
   static final pages = [
     GetPage(name: RouteName.splash, page: () => const SplashScreen()),
     GetPage(name: RouteName.login, page: () => const LoginScreen()),
     GetPage(name: RouteName.home, page: () => MainScreen()),
+    //ANALISIS MARKET
     GetPage(name: RouteName.analisis, page: () => const AnalisisMarketScreen()),
     GetPage(
       name: RouteName.tambahAnalisis,
@@ -26,6 +28,7 @@ class Routes {
       name: RouteName.detailAnalisis,
       page: () => const DetailAnalisisScreen(),
     ),
+    //AJUAN BARANG
     GetPage(
       name: RouteName.requestBarang,
       page: () => const AjuanBarangScreen(),
@@ -33,6 +36,11 @@ class Routes {
     GetPage(
       name: RouteName.tambahAjuanBarang,
       page: () => const AddAjuanBarangScreen(),
+    ),
+    //STOK BARANG MOBIL
+    GetPage(
+      name: RouteName.stockBarangMobil,
+      page: () => const StokBarangMobilScreen(),
     ),
   ];
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' hide Badge;
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:mobile_erp/controllers/ajuan_barang_controller.dart';
 import 'package:mobile_erp/helpers/constants.dart';
 import 'package:mobile_erp/models/ajuan_barang_model.dart';
@@ -49,7 +48,7 @@ class CardAjuanBarang extends StatelessWidget {
         subtitle: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Badge(
+            BadgeComponent(
               borderRadius: 8,
               text: item.statusData!.namaStatus.toString(),
               backgroundColor: () {

@@ -373,6 +373,7 @@ abstract class RouteName {
   //Ceklist Kendaraan
   static const perbaikanKendaraan = "/kendaraan/form-perbaikan";
   //Stock Gudang
+  static const gudang = "/gudang";
   static const stockGudang = "/stock-in";
   //Stock Gudang
   static const stockOpname = "/stock-opname";

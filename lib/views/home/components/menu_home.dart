@@ -120,7 +120,9 @@ class MenuHome extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(RouteName.stockBarangMobil);
+                      },
                       borderRadius: BorderRadius.circular(20),
                       child: Padding(
                         padding: const EdgeInsets.all(25),

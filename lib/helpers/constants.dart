@@ -117,7 +117,7 @@ class CurrencyFormat extends TextInputFormatter {
   }
 }
 
-class Badge extends StatelessWidget {
+class BadgeComponent extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
@@ -125,15 +125,15 @@ class Badge extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final double fontSize;
 
-  const Badge({
-    Key? key,
+  const BadgeComponent({
+    super.key,
     required this.text,
     this.backgroundColor = Colors.blue,
     this.textColor = Colors.white,
     this.borderRadius = 12.0,
     this.padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     this.fontSize = 12.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

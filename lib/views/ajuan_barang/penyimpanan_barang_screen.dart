@@ -77,6 +77,11 @@ class PenyimpananBarangScreen extends StatelessWidget {
 
                       Get.defaultDialog(
                         title: "Tambah Barang",
+                        titleStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        contentPadding: EdgeInsets.all(15),
                         content: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -91,7 +96,7 @@ class PenyimpananBarangScreen extends StatelessWidget {
                               '${barang['stok']} ${barang['satuan'] ?? ''}',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 20),
                             TextFormField(
                               controller: requestController,
                               decoration: InputDecoration(labelText: "Request"),

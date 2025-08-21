@@ -120,7 +120,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                             runSpacing: 8,
                             children: controller.detail['rute']
                                 .map<Widget>(
-                                  (r) => Badge(
+                                  (r) => BadgeComponent(
                                     text: '${r['rute']['nama_rute']}',
                                     backgroundColor: Colors.green[800]!,
                                     borderRadius: 7,
@@ -182,12 +182,7 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 10,
-                                right: 10,
-                                top: 10,
-                                bottom: 0,
-                              ),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -198,12 +193,6 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
                                       return Card(
-                                        margin: EdgeInsets.only(
-                                          left: 0,
-                                          right: 0,
-                                          top: 0,
-                                          bottom: 10,
-                                        ),
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -333,9 +322,6 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                           controller.selectedBarang[index];
 
                                       return Card(
-                                        margin: const EdgeInsets.only(
-                                          bottom: 10,
-                                        ),
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -399,13 +385,13 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                                             .start,
                                                     children: [
                                                       const Text(
-                                                        'STOK',
+                                                        'REQUEST SALES',
                                                         style: TextStyle(
                                                           fontSize: 9,
                                                         ),
                                                       ),
                                                       Text(
-                                                        '${barang['stok']} ${barang['satuan'] ?? ''}',
+                                                        '${barang['request'] ?? '-'}',
                                                         style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -419,13 +405,13 @@ class RincianAjuanBarangScreen extends StatelessWidget {
                                                             .start,
                                                     children: [
                                                       const Text(
-                                                        'REQUEST',
+                                                        'REQUEST SPV',
                                                         style: TextStyle(
                                                           fontSize: 9,
                                                         ),
                                                       ),
                                                       Text(
-                                                        '${barang['request']}',
+                                                        '-',
                                                         style: const TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
